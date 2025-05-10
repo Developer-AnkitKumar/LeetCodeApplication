@@ -51,3 +51,27 @@ const authMiddleware = async (req, res, next) => {
 
 export default authMiddleware;
 
+export const CheckAdmin = async (req, res, next) => {
+    try {
+        const userId = req.user.id;
+        const user = await db.user.findUnique({
+            where: {
+                id: userId,
+            },
+            select: {
+                role: true
+            },
+        });
+
+        if(!user || user.role !== "ADMIN") {
+            return res.status(403).json({
+                message: "Forbidden - Access denied only user admin",
+            });
+        }
+        next(); // Call next()
+    } catch (error) {
+        return res.status(500).json({
+            message: "Internal server error",
+        });
+    }
+}
