@@ -28,6 +28,7 @@ export const createProblem = async (req, res) => {
             const result = await pollbatchResults(tokens);
             for (let i = 0; i < result.length; i++) {
                 const result = result[i];
+                console.log("Result----", result);           
                 if (result.status.id !== 3) {
                     return res.status(400).json({ error: `Test case ${i + 1} failed for language ${language}` });
                 }
