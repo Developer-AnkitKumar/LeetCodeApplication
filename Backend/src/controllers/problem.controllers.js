@@ -1,5 +1,4 @@
-// import { submitBatch, pollbatchResults } from "../utils/judge0.js";
-import { getJudge0LanguageId } from "../lib/judge0.lib.js";
+import { pollbatchResults } from "../lib/judge0.lib.js";
 
 export const createProblem = async (req, res) => {
     const { title, discription, difficulty, tag, example, constraints, testcases,
@@ -26,6 +25,7 @@ export const createProblem = async (req, res) => {
             const tokens = submissionResult.map((res) => (res.token));
 
             const result = await pollbatchResults(tokens);
+
             for (let i = 0; i < result.length; i++) {
                 const result = result[i];
                 console.log("Result----", result);           
@@ -34,7 +34,7 @@ export const createProblem = async (req, res) => {
                 }
             }
             const newProblem = await db.problem.create({
-                data:{
+                data: {
                     title,
                     discription,
                     difficulty,
