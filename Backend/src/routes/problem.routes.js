@@ -13,7 +13,7 @@ const problemRoutes = express.Router();
 
 problemRoutes.post('/create-problem', authMiddleware, CheckAdmin, createProblem);
 
-problemRoutes.get('/get-all-problems', authMiddleware, getAllProblems);
+problemRoutes.get('/get-all-problem', authMiddleware, getAllProblems);
 
 problemRoutes.get('/get-problem/:id', authMiddleware, getProblemById);
 
